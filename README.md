@@ -1,7 +1,7 @@
-# CogniFlow-RAG
+# 🧠 CogniFlow-RAG
 An Enterprise-Grade Agentic RAG system that self-corrects, verifies facts, and uses web search tools. Built with LangGraph &amp; Next.js.
 
-🧠 CogniFlow-RAG: Autonomous Self-Correcting Knowledge Engine
+CogniFlow-RAG: Autonomous Self-Correcting Knowledge Engine
 CogniFlow-RAG is an enterprise-grade "Agentic" Retrieval-Augmented Generation (RAG) platform designed to solve the biggest problem in GenAI: Hallucination.
 
 Unlike traditional RAG systems that blindly trust retrieved documents, CogniFlow uses a Graph-Based Architecture (LangGraph) to "reason" about the data. It evaluates the quality of retrieved information, automatically rewrites poor queries, and falls back to web search if its internal database is insufficient.
