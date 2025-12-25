@@ -1,0 +1,13 @@
+# Python junk
+backend/venv/
+__pycache__/
+*.pyc
+
+# Node junk
+frontend/node_modules/
+.next/
+.DS_Store
+
+# Security (NEVER upload API keys)
+.env
+.env.local
