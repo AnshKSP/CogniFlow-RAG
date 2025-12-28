@@ -1,27 +1,44 @@
-# backend/app/core/config.py
-import os
-from dotenv import load_dotenv
-from pathlib import Path
-
-# 1. Setup the path to the .env file
-# This says: "Go up 3 levels from this file to find the backend folder"
-env_path = Path(__file__).resolve().parent.parent.parent / ".env"
-
-# 2. Force load the .env file
-load_status = load_dotenv(dotenv_path=env_path)
-
 class Settings:
-    PROJECT_NAME = os.getenv("PROJECT_NAME", "CogniFlow RAG")
-    
-    # API Keys
-    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-    PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
-    PINECONE_INDEX_NAME = os.getenv("PINECONE_INDEX_NAME")
+    # Core API keys
+    OPENAI_API_KEY: str
+    PINECONE_API_KEY: str
+    GEMINI_API_KEY: str
 
-settings = Settings()
+    # Pinecone configuration
+    PINECONE_ENV: str
+    PINECONE_INDEX_NAME: str
 
-# Debugging: Print this only if this file is run directly
-if __name__ == "__main__":
-    print(f"Looking for .env at: {env_path}")
-    print(f"File exists? {env_path.exists()}")
-    print(f"Did environment load? {load_status}")
+    # Models / vector config
+    EMBEDDING_MODEL: str
+    VECTOR_DIMENSION: int
+    GEMINI_CHAT_MODEL: str
+    GEMINI_EMBED_MODEL: str
+
+    def __init__(self) -> None:
+        self.OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
+        self.PINECONE_API_KEY = os.getenv("PINECONE_API_KEY", "")
+        self.GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
+
+        self.PINECONE_ENV = os.getenv("PINECONE_ENV", "us-east-1")
+        self.PINECONE_INDEX_NAME = os.getenv("PINECONE_INDEX_NAME", "cogniflow-index")
+
+        # Keep VECTOR_DIMENSION = 768 for gemini-embedding-001 (typical size)
+        self.EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "text-embedding-3-small")
+        self.VECTOR_DIMENSION = int(os.getenv("VECTOR_DIMENSION", "768"))
+
+        self.GEMINI_CHAT_MODEL = os.getenv("GEMINI_CHAT_MODEL", "gemini-2.0-flash")
+        self.GEMINI_EMBED_MODEL = os.getenv("GEMINI_EMBED_MODEL", "gemini-embedding-001")
+
+        self._validate()
+
+    def _validate(self) -> None:
+        missing: list[str] = []
+        for field in ["PINECONE_API_KEY", "GEMINI_API_KEY"]:
+            if not getattr(self, field):
+                missing.append(field)
+
+        if missing:
+            raise RuntimeError(
+                f"Missing required environment variables: {', '.join(missing)}. "
+                "Check that your .env file exists at project root and variables are set."
+            )
