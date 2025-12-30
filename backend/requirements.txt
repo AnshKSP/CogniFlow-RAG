@@ -16,4 +16,4 @@ uvicorn==0.40.0
 openai
 pinecone
 tiktoken
-pip install google-genai
+google-genai

@@ -36,7 +36,7 @@ def ingest_example_docs() -> None:
         },
         {
             "id": "doc2",
-            "text": "The backend is written in Python and uses Gemini Flash as the primary LLM.",
+            "text": "The backend is written in Python and uses Gemini 2.0 Flash as the primary large language model.",
             "metadata": {"source": "internal"},
         },
     ]
