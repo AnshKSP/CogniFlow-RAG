@@ -32,8 +32,8 @@ class Settings:
 
     def __init__(self) -> None:
         # Keys
-        self.PINECONE_API_KEY = os.getenv("PINECONE_API_KEY", "AIzaSyD8jc4znJ6lDknlhoVRIfcHVOgQmC1JMRI")
-        self.GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "pcsk_5ovM9U_FgeSNzeFFPnzr17thxSeQLAwtTtMYcrqXVgqzdLBCVuMdD21YoBTHVD69AS4Se3")
+        self.PINECONE_API_KEY = os.getenv("PINECONE_API_KEY", "")
+        self.GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 
         # Pinecone
         self.PINECONE_ENV = os.getenv("PINECONE_ENV", "us-east-1")
